@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react";
+import AmbientParticles from "./AmbientParticles";
 
 interface FormState {
   name: string;
@@ -33,7 +34,8 @@ export default function ContactSection() {
   };
 
   return (
-    <section className="py-24 bg-[#0d1117]" id="contact">
+    <section className="relative overflow-hidden py-24 bg-[#0d1117]" id="contact">
+      <AmbientParticles id="contact-particles" density={30} opacity={0.15} speed={0.3} linked={true} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

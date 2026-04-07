@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CustomCursor from "@/components/CustomCursor";
 
 export const metadata: Metadata = {
   title: "Shivam Mathur | LATTICE Developer & Aerospace Engineer",
@@ -34,6 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="font-sans">
+        <CustomCursor />
         <Navbar />
         <main>{children}</main>
         <Footer />

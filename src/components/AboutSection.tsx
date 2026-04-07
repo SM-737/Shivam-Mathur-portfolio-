@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { GraduationCap, MapPin, Globe, Award } from "lucide-react";
+import AmbientParticles from "./AmbientParticles";
 
 const education = [
   {
@@ -50,7 +51,8 @@ const certifications = [
 
 export default function AboutSection() {
   return (
-    <section className="py-24 bg-[#0d1117]" id="about">
+    <section className="relative overflow-hidden py-24 bg-[#0d1117]" id="about">
+      <AmbientParticles id="about-particles" density={30} opacity={0.18} speed={0.3} linked={false} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div

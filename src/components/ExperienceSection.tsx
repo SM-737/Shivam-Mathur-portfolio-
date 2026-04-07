@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Briefcase, Calendar, MapPin } from "lucide-react";
+import AmbientParticles from "./AmbientParticles";
 
 const experiences = [
   {
@@ -107,7 +108,8 @@ const experiences = [
 
 export default function ExperienceSection() {
   return (
-    <section className="py-24 bg-[#0a0e1a]" id="experience">
+    <section className="relative overflow-hidden py-24 bg-[#0a0e1a]" id="experience">
+      <AmbientParticles id="experience-particles" density={25} opacity={0.15} speed={0.3} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div

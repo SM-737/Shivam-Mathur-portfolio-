@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Trophy, Medal, Star } from "lucide-react";
+import AmbientParticles from "./AmbientParticles";
 
 const awards = [
   {
@@ -64,7 +65,8 @@ const awards = [
 
 export default function AwardsSection() {
   return (
-    <section className="py-24 bg-[#0a0e1a]" id="awards">
+    <section className="relative overflow-hidden py-24 bg-[#0a0e1a]" id="awards">
+      <AmbientParticles id="awards-particles" density={20} opacity={0.15} speed={0.25} color={["#00d4ff", "#ffd700"]} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

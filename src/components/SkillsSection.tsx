@@ -10,6 +10,7 @@ import {
   Tooltip,
 } from "recharts";
 import { Code2, Wrench, Cpu, Users } from "lucide-react";
+import AmbientParticles from "./AmbientParticles";
 
 const radarData = [
   { skill: "Systems Engineering", value: 90 },
@@ -51,7 +52,8 @@ const skillGroups = [
 
 export default function SkillsSection() {
   return (
-    <section className="py-24 bg-[#0d1117]" id="skills">
+    <section className="relative overflow-hidden py-24 bg-[#0d1117]" id="skills">
+      <AmbientParticles id="skills-particles" density={20} opacity={0.12} speed={0.25} linked={true} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div

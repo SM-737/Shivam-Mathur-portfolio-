@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { BookOpen, ExternalLink } from "lucide-react";
+import AmbientParticles from "./AmbientParticles";
 
 const publications = [
   {
@@ -30,7 +31,8 @@ const publications = [
 
 export default function PublicationsSection() {
   return (
-    <section className="py-24 bg-[#0d1117]" id="publications">
+    <section className="relative overflow-hidden py-24 bg-[#0d1117]" id="publications">
+      <AmbientParticles id="pubs-particles" density={25} opacity={0.15} speed={0.28} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div

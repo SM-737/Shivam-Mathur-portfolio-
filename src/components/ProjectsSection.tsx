@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Shield, Zap, Bot, Rocket, Target, Navigation } from "lucide-react";
+import AmbientParticles from "./AmbientParticles";
 
 const projects = [
   {
@@ -86,7 +87,8 @@ const statusColors: Record<string, string> = {
 
 export default function ProjectsSection() {
   return (
-    <section className="py-24 bg-[#0a0e1a]" id="projects">
+    <section className="relative overflow-hidden py-24 bg-[#0a0e1a]" id="projects">
+      <AmbientParticles id="projects-particles" density={35} opacity={0.2} speed={0.35} linked={true} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
