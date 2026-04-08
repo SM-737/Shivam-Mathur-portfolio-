@@ -100,7 +100,7 @@ const experiences = [
     title: "Mechanical & Electrical Team",
     company: "FIRST Robotics UAE",
     period: "07/2024 – 09/2024",
-    location: "Greece — FIRST Global Challenge",
+    location: "Athens, Greece",
     type: "Competition",
     color: "#4facfe",
     accentBg: "rgba(79,172,254,0.08)",

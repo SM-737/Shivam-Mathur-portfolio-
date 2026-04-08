@@ -75,7 +75,7 @@ function SkillBar({ name, level, color, delay }: { name: string; level: number; 
     <div className="group">
       <div className="flex justify-between items-center mb-1">
         <div className="flex items-center gap-1.5">
-          <ChevronRight size={10} style={{ color }} className="opacity-60" />
+          <ChevronRight size={10} style={{ color }} className="opacity-60" aria-hidden="true" />
           <span className="text-[#8b949e] text-xs group-hover:text-[#e6edf3] transition-colors">{name}</span>
         </div>
         <span className="text-[#8b949e] text-[10px] font-mono">{level}%</span>

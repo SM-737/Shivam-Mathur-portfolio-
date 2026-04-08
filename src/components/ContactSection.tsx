@@ -193,9 +193,10 @@ export default function ContactSection() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               className="glass-card p-4 border border-[#00ff88]/20 bg-[#00ff88]/3"
+              aria-label="Availability status: Open to collaboration"
             >
               <div className="flex items-center gap-3">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#00ff88] animate-pulse flex-shrink-0" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#00ff88] animate-pulse flex-shrink-0" aria-hidden="true" />
                 <div>
                   <p className="text-[#e6edf3] text-sm font-semibold">Available for Collaboration</p>
                   <p className="text-[#8b949e] text-xs mt-0.5">Open to research partnerships and defense tech discussions</p>
