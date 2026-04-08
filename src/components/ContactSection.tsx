@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react";
+import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from "lucide-react";
 import AmbientParticles from "./AmbientParticles";
 
 interface FormState {
@@ -28,9 +28,20 @@ export default function ContactSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("sending");
-    // Simulate sending
-    await new Promise((r) => setTimeout(r, 1500));
-    setStatus("sent");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setStatus("sent");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -122,6 +133,18 @@ export default function ContactSection() {
                   className="mt-6 text-[#00d4ff] hover:underline text-sm"
                 >
                   Send another message
+                </button>
+              </div>
+            ) : status === "error" ? (
+              <div className="glass-card p-8 flex flex-col items-center justify-center text-center h-full">
+                <AlertCircle size={48} className="text-red-400 mb-4" />
+                <h3 className="text-[#e6edf3] font-semibold text-xl mb-2">Delivery Failed</h3>
+                <p className="text-[#8b949e]">Something went wrong. Please email me directly at <a href="mailto:sm0181196@gmail.com" className="text-[#00d4ff] hover:underline">sm0181196@gmail.com</a>.</p>
+                <button
+                  onClick={() => setStatus("idle")}
+                  className="mt-6 text-[#00d4ff] hover:underline text-sm"
+                >
+                  Try again
                 </button>
               </div>
             ) : (
