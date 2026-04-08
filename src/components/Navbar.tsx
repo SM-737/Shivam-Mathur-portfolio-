@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Terminal } from "lucide-react";
+import { Menu, X, Terminal, Sun, Moon } from "lucide-react";
+import { useTheme } from "./ThemeProvider";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -20,6 +21,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  const { theme, toggle } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -74,13 +76,26 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Mobile menu button */}
-          <button
-            className="md:hidden text-[#8b949e] hover:text-[#00d4ff] transition-colors"
-            onClick={() => setMobileOpen(!mobileOpen)}
-          >
-            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          {/* Desktop right side: theme toggle + mobile menu button */}
+          <div className="flex items-center gap-2">
+            {/* Theme toggle */}
+            <button
+              onClick={toggle}
+              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              className="w-8 h-8 flex items-center justify-center rounded border border-[#00d4ff]/30 text-[#8b949e] hover:text-[#00d4ff] hover:border-[#00d4ff] transition-colors"
+            >
+              {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
+            </button>
+
+            {/* Mobile menu button */}
+            <button
+              className="md:hidden text-[#8b949e] hover:text-[#00d4ff] transition-colors"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            >
+              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </div>
       </nav>
 

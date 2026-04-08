@@ -3,8 +3,10 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
+import ThemeProvider from "@/components/ThemeProvider";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://shivammathur.dev"),
   title: "Shivam Mathur | LATTICE Developer & Aerospace Engineer",
   description:
     "Personal portfolio of Shivam Mathur — LATTICE Developer at Anduril Industries, aerospace engineer, and researcher specializing in hypersonic systems, robotics, and defense technology.",
@@ -35,10 +37,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="font-sans">
-        <CustomCursor />
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <ThemeProvider>
+          <CustomCursor />
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
