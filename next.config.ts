@@ -8,8 +8,13 @@ const withMDX = createMDX({
   },
 });
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 const nextConfig: NextConfig = {
+  output: "export",
+  basePath,
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
+  images: { unoptimized: true },
   experimental: {},
 };
 
