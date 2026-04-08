@@ -8,7 +8,11 @@ interface ContactPayload {
 }
 
 function isValidEmail(email: string): boolean {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const at = email.indexOf("@");
+  if (at < 1) return false;
+  const domain = email.slice(at + 1);
+  const dot = domain.lastIndexOf(".");
+  return dot > 0 && dot < domain.length - 1;
 }
 
 async function sendViaResend(payload: ContactPayload): Promise<void> {
