@@ -1,0 +1,201 @@
+"use client";
+
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react";
+import AmbientParticles from "./AmbientParticles";
+
+interface FormState {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
+export default function ContactSection() {
+  const [form, setForm] = useState<FormState>({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("sending");
+    // Simulate sending
+    await new Promise((r) => setTimeout(r, 1500));
+    setStatus("sent");
+  };
+
+  return (
+    <section className="relative overflow-hidden py-24 bg-[#0d1117]" id="contact">
+      <AmbientParticles id="contact-particles" density={30} opacity={0.15} speed={0.3} linked={true} />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-16"
+        >
+          <span className="text-[#00d4ff] font-mono text-sm tracking-widest uppercase">
+            Get in Touch
+          </span>
+          <h2 className="text-4xl font-bold text-[#e6edf3] mt-2">Contact</h2>
+          <div className="w-16 h-1 bg-gradient-to-r from-[#00d4ff] to-transparent mt-4" />
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Contact info */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="space-y-6"
+          >
+            <p className="text-[#8b949e] leading-relaxed text-lg">
+              Interested in collaboration, research partnerships, or defense technology discussions? 
+              I am always open to connecting with fellow engineers, researchers, and industry professionals.
+            </p>
+
+            <div className="space-y-4">
+              {[
+                {
+                  icon: Mail,
+                  label: "Email",
+                  value: "sm0181196@gmail.com",
+                  href: "mailto:sm0181196@gmail.com",
+                },
+                {
+                  icon: Phone,
+                  label: "Phone",
+                  value: "+971 56 795 1630",
+                  href: "tel:+971567951630",
+                },
+                {
+                  icon: MapPin,
+                  label: "Location",
+                  value: "Dubai, UAE / Wollongong, Australia",
+                  href: null,
+                },
+              ].map(({ icon: Icon, label, value, href }) => (
+                <div key={label} className="glass-card p-4 flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-[#00d4ff]/10 border border-[#00d4ff]/20 flex items-center justify-center flex-shrink-0">
+                    <Icon size={18} className="text-[#00d4ff]" />
+                  </div>
+                  <div>
+                    <p className="text-[#8b949e] text-xs">{label}</p>
+                    {href ? (
+                      <a
+                        href={href}
+                        className="text-[#e6edf3] hover:text-[#00d4ff] transition-colors font-medium"
+                      >
+                        {value}
+                      </a>
+                    ) : (
+                      <p className="text-[#e6edf3] font-medium">{value}</p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            {status === "sent" ? (
+              <div className="glass-card p-8 flex flex-col items-center justify-center text-center h-full">
+                <CheckCircle size={48} className="text-[#00d4ff] mb-4" />
+                <h3 className="text-[#e6edf3] font-semibold text-xl mb-2">Message Sent!</h3>
+                <p className="text-[#8b949e]">Thank you for reaching out. I will get back to you shortly.</p>
+                <button
+                  onClick={() => { setStatus("idle"); setForm({ name: "", email: "", subject: "", message: "" }); }}
+                  className="mt-6 text-[#00d4ff] hover:underline text-sm"
+                >
+                  Send another message
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="glass-card p-8 space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  {[
+                    { name: "name", label: "Name", type: "text", placeholder: "Your name" },
+                    { name: "email", label: "Email", type: "email", placeholder: "your@email.com" },
+                  ].map(({ name, label, type, placeholder }) => (
+                    <div key={name}>
+                      <label className="block text-[#8b949e] text-xs mb-2 uppercase tracking-wider">
+                        {label}
+                      </label>
+                      <input
+                        type={type}
+                        name={name}
+                        value={form[name as keyof FormState]}
+                        onChange={handleChange}
+                        placeholder={placeholder}
+                        required
+                        className="w-full bg-[#0a0e1a] border border-[#21262d] rounded-lg px-4 py-3 text-[#e6edf3] text-sm placeholder-[#8b949e] focus:outline-none focus:border-[#00d4ff] transition-colors"
+                      />
+                    </div>
+                  ))}
+                </div>
+
+                <div>
+                  <label className="block text-[#8b949e] text-xs mb-2 uppercase tracking-wider">
+                    Subject
+                  </label>
+                  <input
+                    type="text"
+                    name="subject"
+                    value={form.subject}
+                    onChange={handleChange}
+                    placeholder="What is this about?"
+                    required
+                    className="w-full bg-[#0a0e1a] border border-[#21262d] rounded-lg px-4 py-3 text-[#e6edf3] text-sm placeholder-[#8b949e] focus:outline-none focus:border-[#00d4ff] transition-colors"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[#8b949e] text-xs mb-2 uppercase tracking-wider">
+                    Message
+                  </label>
+                  <textarea
+                    name="message"
+                    value={form.message}
+                    onChange={handleChange}
+                    placeholder="Your message..."
+                    required
+                    rows={5}
+                    className="w-full bg-[#0a0e1a] border border-[#21262d] rounded-lg px-4 py-3 text-[#e6edf3] text-sm placeholder-[#8b949e] focus:outline-none focus:border-[#00d4ff] transition-colors resize-none"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={status === "sending"}
+                  className="w-full flex items-center justify-center gap-2 py-3 bg-[#00d4ff] text-[#0a0e1a] font-semibold rounded-lg hover:bg-[#4facfe] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-[#00d4ff]/25"
+                >
+                  {status === "sending" ? (
+                    <span className="animate-pulse">Sending...</span>
+                  ) : (
+                    <>
+                      Send Message <Send size={16} />
+                    </>
+                  )}
+                </button>
+              </form>
+            )}
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
