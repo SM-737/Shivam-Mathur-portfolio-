@@ -211,16 +211,67 @@ a, button, input, textarea, select, [role="button"] {
   animation: neon-border 2s ease-in-out infinite;
 }
 
-/* ── Shimmer loading ─────────────────────────── */
-@keyframes shimmer {
-  0%   { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+/* ── Ticker / marquee ────────────────────────── */
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-.shimmer {
-  background: linear-gradient(90deg,
-    transparent 0%, rgba(0,212,255,0.08) 50%, transparent 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 2.5s infinite;
+.ticker-track {
+  animation: ticker 35s linear infinite;
+}
+
+/* ── Counter up ──────────────────────────────── */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Glow pulse ──────────────────────────────── */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(0,212,255,0.15), 0 0 40px rgba(0,212,255,0.05); }
+  50%      { box-shadow: 0 0 30px rgba(0,212,255,0.3), 0 0 60px rgba(0,212,255,0.1); }
+}
+
+.glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* ── Neon text ───────────────────────────────── */
+.neon-text {
+  text-shadow: 0 0 10px rgba(0,212,255,0.8), 0 0 20px rgba(0,212,255,0.5), 0 0 40px rgba(0,212,255,0.3);
+}
+
+/* ── Border gradient spin ────────────────────── */
+@keyframes border-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── Background move ─────────────────────────── */
+@keyframes bg-pan {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-bg-pan {
+  animation: bg-pan 8s ease infinite;
+  background-size: 200% 200%;
+}
+
+/* ── Typewriter cursor ───────────────────────── */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+
+/* ── Fade in up stagger ──────────────────────── */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-up {
+  animation: fade-in-up 0.6s ease forwards;
 }
